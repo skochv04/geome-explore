@@ -69,6 +69,12 @@ Poniższe funkcje mogą zostać zrealizowane w zależności od dostępnego czasu
 
 ## 4. Wymagania niefunkcjonalne
 
+- **Platforma:** aplikacja mobilna przeznaczona na system Android, rozwijana z wykorzystaniem Fluttera.
+- **Przechowywanie danych:** centralna baza danych umożliwiająca synchronizację wpisów i zapisanych kolekcji między urządzeniami.
+- **Bezpieczeństwo:** uwierzytelnianie użytkowników oraz kontrola dostępu do danych na poziomie backendu (Row Level Security).
+- **Komunikacja:** asynchroniczna wymiana danych między aplikacją a backendem.
+- **Architektura:** oddzielenie interfejsu użytkownika od logiki aplikacji i warstwy dostępu do danych.
+
 ## 5. Projekt interfejsu użytkownika
 
 ## 6. Architektura aplikacji
