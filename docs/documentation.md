@@ -77,6 +77,120 @@ Poniższe funkcje mogą zostać zrealizowane w zależności od dostępnego czasu
 
 ## 5. Projekt interfejsu użytkownika
 
+### 5.1. Ekrany podstawowe
+
+#### 5.1.1. Strona miasta (ekran główny)
+
+Główny ekran aplikacji, dostępny również bez logowania.
+
+- Nazwa, zdjęcie i podstawowe informacje o wybranym mieście.
+- Możliwość wyszukania i zmiany miasta.
+- Wyświetlanie najpopularniejszych wpisów dotyczących miasta, na podstawie liczby zapisów przez użytkowników.
+- Przejście do pełnej listy wpisów dotyczących miasta.
+- Przejście do szczegółów wybranego wpisu.
+
+Przy pierwszym uruchomieniu użytkownik wybiera miasto. Przy kolejnych uruchomieniach aplikacja wyświetla ostatnio wybrane miasto.
+
+#### 5.1.2. Rejestracja
+
+- Formularz tworzenia nowego konta.
+- Przejście do ekranu logowania.
+
+Rejestracja nie jest wymagana do przeglądania publicznej zawartości aplikacji.
+
+#### 5.1.3. Logowanie
+
+- Formularz logowania do istniejącego konta.
+- Przejście do ekranu rejestracji.
+
+Logowanie jest wymagane przy próbie skorzystania z funkcji związanych z kontem użytkownika, np. tworzenia lub zapisywania wpisów.
+
+#### 5.1.4. Profil użytkownika
+
+- Podstawowe informacje o użytkowniku.
+- Lista opublikowanych wpisów.
+- Dostęp do zapisanych wpisów.
+- Możliwość wylogowania.
+
+Dla niezalogowanego użytkownika zamiast profilu wyświetlana jest możliwość zalogowania lub rejestracji.
+
+#### 5.1.5. Tworzenie i edycja wpisu
+
+Ekran umożliwiający:
+
+- Wybór miasta, którego dotyczy wpis.
+- Wprowadzenie tytułu.
+- Wybór jednej lub kilku kategorii.
+- Dodanie opcjonalnego opisu całego wpisu.
+- Wyszukiwanie i dodawanie miejsc w określonej kolejności.
+- Dodawanie własnych opisów i opinii do poszczególnych miejsc.
+- Zmianę kolejności dodanych miejsc.
+- Usuwanie miejsc z wpisu.
+- Określenie szacowanego czasu potrzebnego na odwiedzenie miejsc.
+- Zapisanie i opublikowanie wpisu.
+
+Ten sam formularz będzie wykorzystywany do edycji istniejących wpisów. Tworzenie i edycja są dostępne wyłącznie dla zalogowanych użytkowników.
+
+#### 5.1.6. Lista wpisów
+
+Ekran umożliwiający przeglądanie wpisów w trzech trybach:
+
+- **Wszystkie** – publiczne wpisy opublikowane przez użytkowników.
+- **Moje** – wpisy utworzone przez zalogowanego użytkownika, z możliwością edycji i usunięcia.
+- **Zapisane** – wpisy zapisane przez użytkownika, z możliwością usunięcia ich z własnej kolekcji.
+
+Dodatkowo:
+
+- Wyszukiwanie wpisów według miasta.
+- Filtrowanie według jednej lub kilku kategorii.
+- Filtrowanie według dostępnego czasu zwiedzania.
+- Łączenie kryteriów wyszukiwania.
+- Przejście do szczegółów wybranego wpisu.
+- Przycisk tworzenia nowego wpisu.
+
+Tryb „Wszystkie” jest dostępny bez logowania. Pozostałe tryby wymagają zalogowania.
+
+#### 5.1.7. Szczegóły wpisu
+
+- Tytuł, kategorie i opis wpisu.
+- Informacje o autorze i mieście.
+- Szacowany czas zwiedzania.
+- Lista miejsc w kolejności określonej przez autora.
+- Opisy i opinie przypisane do poszczególnych miejsc.
+- Możliwość otwarcia wybranego miejsca w Google Maps.
+- Możliwość zapisania wpisu lub usunięcia go z zapisanych.
+- Przejście do strony miasta.
+
+Przeglądanie wpisu jest dostępne bez logowania. Zapisywanie wymaga zalogowania.
+
+### 5.2. Ekrany i funkcjonalności dodatkowe
+
+#### 5.2.1. Szczegóły miejsca
+
+- Nazwa, adres i podstawowe informacje o miejscu.
+- Lista wpisów, w których pojawia się dane miejsce.
+- Możliwość otwarcia lokalizacji w Google Maps.
+
+#### 5.2.2. Odwiedzone miejsca i miasta
+
+- Oznaczanie miejsc i miast jako odwiedzonych.
+- Przeglądanie listy odwiedzonych miejsc i miast.
+- Wyświetlanie statystyk odwiedzonych miast i miejsc w profilu użytkownika.
+
+#### 5.2.3. Komentarze
+
+- Przeglądanie komentarzy pod wpisami.
+- Dodawanie komentarzy przez zalogowanych użytkowników.
+- Usuwanie własnych komentarzy.
+
+### 5.3. Nawigacja aplikacji
+
+Głównym ekranem aplikacji będzie strona wybranego miasta. Przeglądanie miast, miejsc i publicznych wpisów nie będzie wymagało logowania.
+
+Ekrany logowania i rejestracji będą dostępne z poziomu aplikacji oraz przy próbie wykonania czynności wymagającej uwierzytelnienia.
+
+### 5.4. Projekty graficzne
+
 ## 6. Architektura aplikacji
 
 ## 7. Model bazy danych
