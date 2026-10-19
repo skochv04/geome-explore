@@ -9,7 +9,7 @@ Aplikacja mobilna umożliwiająca odkrywanie miast na podstawie doświadczeń in
 - Flutter (Dart)
 - Supabase (PostgreSQL, Auth)
 - Google Places API (planowane)
-- 
+
 ## Plan realizacji
 
 | Tydzień | Daty | Stas | Diana | Wspólnie |
@@ -27,7 +27,7 @@ Aplikacja mobilna umożliwiająca odkrywanie miast na podstawie doświadczeń in
 | 11–12 | 23.12–05.01 | — | — | — |
 | 13 | 06.01–12.01 | — | — | — |
 | 14 | 13.01–19.01 | — | — | — |
-| 15 | 20.01–26.01 | — | — | — |
+| 15 | 20.01–26.01 | — | — | Prezentacja gotowej aplikacji |
 
 *Plan będzie uzupełniany i aktualizowany w trakcie realizacji projektu.*
 
