@@ -15,9 +15,9 @@ Aplikacja mobilna umożliwiająca odkrywanie miast na podstawie doświadczeń in
 | Tydzień | Daty | Stas | Diana | Wspólnie |
 |---|---|---|---|---|
 | 1 | 14.10–20.10 | — | — | Utworzenie repozytorium, opis głównych funkcjonalności aplikacji, określenie listy planowanych ekranów |
-| 2 | 21.10–27.10 | — | — | Projekt modelu bazy danych, nauka podstaw Fluttera |
-| 3 | 28.10–03.11 | — | — | Implementacja pierwszych prostych ekranów aplikacji, przygotowanie projektów graficznych wybranych widoków |
-| 4 | 04.11–10.11 | — | — | — |
+| 2 | 21.10–27.10 | — | — | Nauka podstaw Fluttera, stworzenie prostej aplikacji z nawigacją między ekranami |
+| 3 | 28.10–03.11 | — | — | Przygotowanie modelu bazy danych, komponentów systemu projektowego aplikacji |
+| 4 | 04.11–10.11 | — | — | Implementacja pierwszych ekranów aplikacji |
 | 5 | 11.11–17.11 | — | — | — |
 | 6 | 18.11–24.11 | — | — | — |
 | 7 | 25.11–01.12 | — | — | — |

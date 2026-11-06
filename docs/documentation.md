@@ -8,7 +8,7 @@ Główną ideą projektu jest możliwość tworzenia tematycznych zbiorów miejs
 
 Pozostali użytkownicy mogą przeglądać i zapisywać takie zbiory, aby łatwiej planować zwiedzanie. Aplikacja ma stanowić alternatywę dla czasochłonnego wyszukiwania rekomendacji w mediach społecznościowych.
 
-Istotnym elementem aplikacji będzie personalizacja propozycji zwiedzania z uwzględnieniem indywidualnych preferencji i ograniczeń czasowych użytkownika. Dzięki temu użytkownik będzie mógł odkrywać miejsca i gotowe propozycje ich odwiedzenia, dopasowane do swoich zainteresowań oraz czasu, którym dysponuje.
+Wyszukiwanie i filtrowanie wpisów według kategorii oraz dostępnego czasu pozwoli użytkownikowi znaleźć propozycje zwiedzania dopasowane do jego zainteresowań i możliwości czasowych.
 
 ## 2. Wymagania funkcjonalne
 
@@ -79,37 +79,46 @@ Poniższe funkcje mogą zostać zrealizowane w zależności od dostępnego czasu
 
 ### 5.1. Ekrany podstawowe
 
-#### 5.1.1. Strona miasta (ekran główny)
+#### 5.1.1. Strona miasta (City – ekran główny)
 
 Główny ekran aplikacji, dostępny również bez logowania.
 
-- Nazwa, zdjęcie i podstawowe informacje o wybranym mieście.
+- Nazwa, zdjęcie i krótki opis wybranego miasta.
 - Możliwość wyszukania i zmiany miasta.
-- Wyświetlanie najpopularniejszych wpisów dotyczących miasta, na podstawie liczby zapisów przez użytkowników.
-- Przejście do pełnej listy wpisów dotyczących miasta.
-- Przejście do szczegółów wybranego wpisu.
+- Sekcja **Most saved** z wpisami najczęściej zapisywanymi przez użytkowników.
+- Sekcja **Recently added** z najnowszymi wpisami.
+- Przeglądanie wpisów według kategorii, z przejściem do ekranu Explore.
+- Przejście do szczegółów wpisu oraz do pełnej listy wpisów dotyczących miasta.
+- Przycisk **Create a post** umożliwiający rozpoczęcie tworzenia wpisu.
 
 Przy pierwszym uruchomieniu użytkownik wybiera miasto. Przy kolejnych uruchomieniach aplikacja wyświetla ostatnio wybrane miasto.
 
-#### 5.1.2. Rejestracja
+#### 5.1.2. Explore (wyszukiwanie wpisów)
 
-- Formularz tworzenia nowego konta.
-- Przejście do ekranu logowania.
+- Przeglądanie wszystkich publicznych wpisów.
+- Wyszukiwanie wpisów według miasta.
+- Filtrowanie według jednej lub kilku kategorii.
+- Filtrowanie według maksymalnego dostępnego czasu zwiedzania.
+- Łączenie kryteriów wyszukiwania.
+- Sortowanie według liczby zapisów lub daty publikacji.
+- Przejście do szczegółów wybranego wpisu.
 
-Rejestracja nie jest wymagana do przeglądania publicznej zawartości aplikacji.
+Ekran jest dostępny bez logowania. Wybranie kategorii na stronie miasta otwiera Explore z odpowiednim filtrem.
 
-#### 5.1.3. Logowanie
+#### 5.1.3. Saved (zapisane wpisy)
 
-- Formularz logowania do istniejącego konta.
-- Przejście do ekranu rejestracji.
+- Lista wpisów zapisanych przez zalogowanego użytkownika.
+- Grupowanie zapisanych wpisów według miast.
+- Przejście do szczegółów wpisu.
+- Możliwość usunięcia wpisu z zapisanych.
 
-Logowanie jest wymagane przy próbie skorzystania z funkcji związanych z kontem użytkownika, np. tworzenia lub zapisywania wpisów.
+Ekran wymaga zalogowania.
 
-#### 5.1.4. Profil użytkownika
+#### 5.1.4. Profil użytkownika (Profile)
 
 - Podstawowe informacje o użytkowniku.
-- Lista opublikowanych wpisów.
-- Dostęp do zapisanych wpisów.
+- Przejście do **My posts** – listy własnych opublikowanych wpisów.
+- Możliwość edycji i usunięcia własnych wpisów.
 - Możliwość wylogowania.
 
 Dla niezalogowanego użytkownika zamiast profilu wyświetlana jest możliwość zalogowania lub rejestracji.
@@ -124,37 +133,17 @@ Ekran umożliwiający:
 - Dodanie opcjonalnego opisu całego wpisu.
 - Wyszukiwanie i dodawanie miejsc w określonej kolejności.
 - Dodawanie własnych opisów i opinii do poszczególnych miejsc.
-- Zmianę kolejności dodanych miejsc.
-- Usuwanie miejsc z wpisu.
+- Zmianę kolejności dodanych miejsc i usuwanie ich z wpisu.
 - Określenie szacowanego czasu potrzebnego na odwiedzenie miejsc.
 - Zapisanie i opublikowanie wpisu.
 
 Ten sam formularz będzie wykorzystywany do edycji istniejących wpisów. Tworzenie i edycja są dostępne wyłącznie dla zalogowanych użytkowników.
 
-#### 5.1.6. Lista wpisów
+#### 5.1.6. Szczegóły wpisu
 
-Ekran umożliwiający przeglądanie wpisów w trzech trybach:
-
-- **Wszystkie** – publiczne wpisy opublikowane przez użytkowników.
-- **Moje** – wpisy utworzone przez zalogowanego użytkownika, z możliwością edycji i usunięcia.
-- **Zapisane** – wpisy zapisane przez użytkownika, z możliwością usunięcia ich z własnej kolekcji.
-
-Dodatkowo:
-
-- Wyszukiwanie wpisów według miasta.
-- Filtrowanie według jednej lub kilku kategorii.
-- Filtrowanie według dostępnego czasu zwiedzania.
-- Łączenie kryteriów wyszukiwania.
-- Przejście do szczegółów wybranego wpisu.
-- Przycisk tworzenia nowego wpisu.
-
-Tryb „Wszystkie” jest dostępny bez logowania. Pozostałe tryby wymagają zalogowania.
-
-#### 5.1.7. Szczegóły wpisu
-
-- Tytuł, kategorie i opis wpisu.
+- Okładka, tytuł, kategorie i opis wpisu.
 - Informacje o autorze i mieście.
-- Szacowany czas zwiedzania.
+- Liczba miejsc i szacowany czas zwiedzania.
 - Lista miejsc w kolejności określonej przez autora.
 - Opisy i opinie przypisane do poszczególnych miejsc.
 - Możliwość otwarcia wybranego miejsca w Google Maps.
@@ -162,6 +151,14 @@ Tryb „Wszystkie” jest dostępny bez logowania. Pozostałe tryby wymagają za
 - Przejście do strony miasta.
 
 Przeglądanie wpisu jest dostępne bez logowania. Zapisywanie wymaga zalogowania.
+
+#### 5.1.7. Logowanie i rejestracja
+
+- Formularz logowania do istniejącego konta.
+- Formularz tworzenia nowego konta.
+- Przechodzenie między logowaniem i rejestracją.
+
+Konto nie jest wymagane do przeglądania publicznej zawartości. Logowanie jest wymagane przy tworzeniu i zapisywaniu wpisów oraz korzystaniu z funkcji profilu.
 
 ### 5.2. Ekrany i funkcjonalności dodatkowe
 
@@ -185,15 +182,33 @@ Przeglądanie wpisu jest dostępne bez logowania. Zapisywanie wymaga zalogowania
 
 ### 5.3. Nawigacja aplikacji
 
-Głównym ekranem aplikacji będzie strona wybranego miasta. Przeglądanie miast, miejsc i publicznych wpisów nie będzie wymagało logowania.
+Dolne menu będzie zawierać cztery zakładki: **City**, **Explore**, **Saved** i **Profile**. Strona miasta będzie ekranem głównym aplikacji. Lista własnych wpisów (**My posts**) będzie dostępna z profilu, a tworzenie nowego wpisu – m.in. przez przycisk na stronie miasta.
 
-Ekrany logowania i rejestracji będą dostępne z poziomu aplikacji oraz przy próbie wykonania czynności wymagającej uwierzytelnienia.
+Przeglądanie miast i publicznych wpisów nie będzie wymagało logowania. Ekrany logowania i rejestracji będą dostępne przy próbie wykonania czynności wymagającej uwierzytelnienia. Interfejs aplikacji będzie w języku angielskim.
 
 ### 5.4. Projekty graficzne
 
 ## 6. Architektura aplikacji
 
 ## 7. Model bazy danych
+
+Wstępny model zakłada wykorzystanie relacyjnej bazy PostgreSQL w usłudze Supabase. Składa się z ośmiu tabel:
+
+- `profiles` – podstawowe dane profili użytkowników; uwierzytelnianie będzie obsługiwane przez Supabase Auth.
+- `cities` – miasta wraz z opisami i zdjęciami.
+- `places` – miejsca przypisane do miast.
+- `posts` – wpisy tworzone przez użytkowników, z tytułem, opisem i szacowanym czasem zwiedzania.
+- `post_places` – miejsca należące do wpisu, ich kolejność oraz opisy autora.
+- `categories` – dostępne kategorie wpisów.
+- `post_categories` – powiązania wpisów z kategoriami (relacja wiele do wielu).
+- `saved_posts` – wpisy zapisane przez użytkowników.
+
+Tabela `post_places` pozwala umieszczać to samo miejsce w różnych wpisach, zachowując osobną kolejność i opis. Popularność wpisu będzie ustalana na podstawie liczby zapisów w `saved_posts`, bez osobnego systemu rekomendacji.
+
+![Wstępny model bazy danych Geome Explore](images/database-model.png)
+
+*Rysunek 1. Wstępny diagram relacji bazy danych Geome Explore.*
+
 
 ## 8. Implementacja
 
