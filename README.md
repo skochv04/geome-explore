@@ -17,10 +17,10 @@ Aplikacja mobilna umożliwiająca odkrywanie miast na podstawie doświadczeń in
 | 1 | 14.10–20.10 | — | — | Utworzenie repozytorium, opis głównych funkcjonalności aplikacji, określenie listy planowanych ekranów |
 | 2 | 21.10–27.10 | — | — | Nauka podstaw Fluttera, stworzenie prostej aplikacji z nawigacją między ekranami |
 | 3 | 28.10–03.11 | — | — | Przygotowanie modelu bazy danych, komponentów systemu projektowego aplikacji |
-| 4 | 04.11–10.11 | — | — | Implementacja pierwszych ekranów aplikacji |
-| 5 | 11.11–17.11 | — | — | — |
-| 6 | 18.11–24.11 | — | — | — |
-| 7 | 25.11–01.12 | — | — | — |
+| 4 | 04.11–10.11 | Konfiguracja Supabase i połączenie aplikacji z bazą danych | Implementacja rejestracji, logowania i wylogowywania | — |
+| 5 | 11.11–17.11 | Implementacja tworzenia i edycji wpisów | Implementacja profilu użytkownika | — |
+| 6 | 18.11–24.11 | Implementacja szczegółów wpisu, wyświetlanie wpisów na ekranie City | Dodaine listy My posts w profilu użytkownika, implementacja ekranu Saved i zapisywania wpisów | — |
+| 7 | 25.11–01.12 | Implementacja ekranu City | Implementacja ekranu Explore | — |
 | 8 | 02.12–08.12 | — | — | — |
 | 9 | 09.12–15.12 | — | — | — |
 | 10 | 16.12–22.12 | — | — | — |

@@ -188,11 +188,37 @@ Przeglądanie miast i publicznych wpisów nie będzie wymagało logowania. Ekran
 
 ### 5.4. Projekty graficzne
 
+Przygotowano wspólną stylistykę interfejsu opartą na kroju pisma **Montserrat** oraz palecie kolorów: niebieski `#0054D2` (kolor główny), ciemnoniebieski `#1A418E`, jasnoniebieski `#E7EEFA`, tło `#FBFDFF` i kolor tekstu `#323232`. Kolory i style tekstu zostały zdefiniowane centralnie, aby zachować spójność kolejnych ekranów.
+
 ## 6. Architektura aplikacji
+
+Aplikacja jest rozwijana we **Flutterze (Dart)**. Interfejs korzysta ze wspólnego motywu oraz podziału kodu na moduły odpowiadające funkcjom aplikacji. Do przechowywania danych wykorzystano **Supabase** z bazą **PostgreSQL**. Aplikacja komunikuje się z usługą przez bibliotekę `supabase_flutter`; konfiguracja połączenia jest wczytywana z pliku `.env`.
+
+Aktualna struktura głównych plików i katalogów kodu aplikacji:
+
+```text
+lib/
+├── main.dart
+├── app/
+│   ├── main_screen.dart
+│   ├── theme/
+│   │   ├── app_colors.dart
+│   │   ├── app_text_styles.dart
+│   │   └── app_theme.dart
+│   └── widgets/
+├── features/
+│   ├── city/
+│   ├── explore/
+│   ├── saved/
+│   └── profile/
+└── shared/
+    └── widgets/
+```
 
 ## 7. Model bazy danych
 
-Wstępny model zakłada wykorzystanie relacyjnej bazy PostgreSQL w usłudze Supabase. Składa się z ośmiu tabel:
+Model danych został utworzony w bazie **PostgreSQL** udostępnianej przez **Supabase**. Obejmuje osiem tabel aplikacyjnych:
+
 
 - `profiles` – podstawowe dane profili użytkowników; uwierzytelnianie będzie obsługiwane przez Supabase Auth.
 - `cities` – miasta wraz z opisami i zdjęciami.
@@ -204,6 +230,8 @@ Wstępny model zakłada wykorzystanie relacyjnej bazy PostgreSQL w usłudze Supa
 - `saved_posts` – wpisy zapisane przez użytkowników.
 
 Tabela `post_places` pozwala umieszczać to samo miejsce w różnych wpisach, zachowując osobną kolejność i opis. Popularność wpisu będzie ustalana na podstawie liczby zapisów w `saved_posts`, bez osobnego systemu rekomendacji.
+
+**Supabase Auth** zapewnia obsługę kont i uwierzytelniania użytkowników. Dane logowania są przechowywane w systemie uwierzytelniania Supabase, natomiast tabela `profiles` zawiera dane profilu aplikacyjnego i jest powiązana z kontem użytkownika. Dostęp do danych jest kontrolowany za pomocą uprawnień PostgreSQL i polityk **Row Level Security (RLS)**, które pozwalają rozróżnić operacje dostępne publicznie i wymagające zalogowania.
 
 ![Wstępny model bazy danych Geome Explore](images/database-model.png)
 
