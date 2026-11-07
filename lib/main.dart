@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'app/main_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: '.env');
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY']!,
+  );
+
+  runApp(const GeomeExploreApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class GeomeExploreApp extends StatelessWidget {
+  const GeomeExploreApp ({super.key});
 
   // This widget is the root of your application.
   @override
