@@ -6,8 +6,6 @@ import '../data/auth_repository.dart';
 import '../validators.dart';
 import 'register_screen.dart';
 
-/// Ekran logowania. Po udanym logowaniu zamyka się (Navigator.pop),
-/// a ekran, który go otworzył, sam odświeży się dzięki authStateChanges.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

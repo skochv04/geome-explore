@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Wspólny przycisk aplikacji.
-///
-/// [primary] – wypełniony przycisk (główna akcja, np. "Log in").
-/// [secondary] – przycisk z obramowaniem (akcja poboczna, np. "Log out").
-/// Gdy [isLoading] = true, przycisk jest nieaktywny i pokazuje spinner.
 enum AppButtonVariant { primary, secondary }
 
 class AppButton extends StatelessWidget {

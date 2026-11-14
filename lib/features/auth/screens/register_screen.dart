@@ -6,10 +6,6 @@ import '../data/auth_repository.dart';
 import '../validators.dart';
 import 'login_screen.dart';
 
-/// Ekran rejestracji.
-/// - Jeśli Supabase loguje od razu – zamykamy ekran (użytkownik jest zalogowany).
-/// - Jeśli wymagane jest potwierdzenie e-mail – pokazujemy komunikat
-///   i przechodzimy do logowania.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 

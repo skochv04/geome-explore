@@ -10,9 +10,6 @@ import '../../auth/validators.dart';
 import '../data/profile.dart';
 import '../data/profile_repository.dart';
 
-/// Zakładka Profile.
-/// Słucha zmian stanu logowania: niezalogowany widzi przyciski
-/// Log in / Sign up, zalogowany – swój profil.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -22,14 +19,12 @@ class ProfileScreen extends StatelessWidget {
       stream: AuthRepository.instance.authStateChanges,
       builder: (context, _) {
         if (!AuthRepository.instance.isLoggedIn) return const _GuestView();
-        // Klucz = id użytkownika, żeby po zmianie konta profil wczytał się od nowa.
         return _UserView(key: ValueKey(AuthRepository.instance.currentUser!.id));
       },
     );
   }
 }
 
-/// Widok dla niezalogowanego użytkownika.
 class _GuestView extends StatelessWidget {
   const _GuestView();
 
@@ -71,7 +66,6 @@ class _GuestView extends StatelessWidget {
   }
 }
 
-/// Widok profilu zalogowanego użytkownika.
 class _UserView extends StatefulWidget {
   const _UserView({super.key});
 
@@ -82,13 +76,14 @@ class _UserView extends StatefulWidget {
 class _UserViewState extends State<_UserView> {
   late Future<Profile?> _profileFuture = _loadProfile();
 
-  Future<Profile?> _loadProfile() async {
-    // Na wypadek gdyby wiersz w `profiles` jeszcze nie istniał.
-    await ProfileRepository.instance.ensureProfileExists();
-    return ProfileRepository.instance.getCurrentProfile();
-  }
+  Future<Profile?> _loadProfile() =>
+      ProfileRepository.instance.getCurrentProfile();
 
-  void _reload() => setState(() => _profileFuture = _loadProfile());
+  void _reload() {
+    setState(() {
+      _profileFuture = _loadProfile();
+    });
+  }
 
   Future<void> _editUsername(String current) async {
     final newUsername = await showDialog<String>(
@@ -110,7 +105,6 @@ class _UserViewState extends State<_UserView> {
   Future<void> _logOut() async {
     try {
       await AuthRepository.instance.signOut();
-      // StreamBuilder w ProfileScreen sam przełączy widok na _GuestView.
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context)
@@ -210,7 +204,6 @@ class _UserViewState extends State<_UserView> {
   }
 }
 
-/// Okno dialogowe do zmiany username.
 class _EditUsernameDialog extends StatefulWidget {
   const _EditUsernameDialog({required this.initial});
 

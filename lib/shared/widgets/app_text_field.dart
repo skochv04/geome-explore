@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Wspólne pole tekstowe aplikacji (do użycia wewnątrz [Form]).
-///
-/// Dla [isPassword] = true tekst jest ukryty, a z prawej strony
-/// pojawia się ikonka "oko" do pokazania/ukrycia hasła.
 class AppTextField extends StatefulWidget {
   const AppTextField({
     super.key,

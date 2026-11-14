@@ -1,4 +1,3 @@
-/// Model wiersza z tabeli `profiles`.
 class Profile {
   const Profile({
     required this.id,

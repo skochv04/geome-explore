@@ -1,5 +1,3 @@
-/// Walidatory pól formularzy logowania i rejestracji.
-/// Zwracają komunikat błędu albo null, gdy wartość jest poprawna.
 abstract final class Validators {
   static final RegExp _emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
@@ -9,14 +7,13 @@ abstract final class Validators {
     return null;
   }
 
-  /// Supabase domyślnie wymaga co najmniej 6 znaków.
   static String? password(String? value) {
     if (value == null || value.isEmpty) return 'Enter your password';
     if (value.length < 6) return 'At least 6 characters';
     return null;
   }
 
-  /// W tabeli `profiles` username to varchar(50).
+  // varchar(50) w tabeli profiles
   static String? username(String? value) {
     final v = value?.trim() ?? '';
     if (v.length < 3) return 'At least 3 characters';
