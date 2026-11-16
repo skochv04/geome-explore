@@ -9,12 +9,19 @@ class CityRepository {
   SupabaseClient get _db => Supabase.instance.client;
 
   Future<List<City>> getCities() async {
-    final rows = await _db
-        .from('cities')
-        .select('id, name, country')
-        .order('name')
-        .order('country');
-
-    return rows.map(City.fromMap).toList();
+    final cities = <City>[];
+    var offset = 0;
+    while (true) {
+      final rows = await _db
+          .from('cities')
+          .select('id, name, country, description, image_url')
+          .order('name')
+          .order('country')
+          .order('id')
+          .range(offset, offset + 499);
+      if (rows.isEmpty) return cities;
+      cities.addAll(rows.map(City.fromMap));
+      offset += rows.length;
+    }
   }
 }

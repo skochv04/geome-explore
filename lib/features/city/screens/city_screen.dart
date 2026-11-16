@@ -1,106 +1,80 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
 import '../../../shared/widgets/app_button.dart';
-import '../data/city.dart';
-import '../data/city_repository.dart';
+import '../../explore/data/explore_filter.dart';
+import '../data/city_selection.dart';
+import '../widgets/city_landing.dart';
+import '../widgets/city_picker.dart';
 
-class CityScreen extends StatefulWidget {
-  const CityScreen({super.key});
+class CityScreen extends StatelessWidget {
+  const CityScreen({super.key, required this.onExplore});
 
-  @override
-  State<CityScreen> createState() => _CityScreenState();
-}
+  final ValueChanged<ExploreFilter> onExplore;
 
-class _CityScreenState extends State<CityScreen> {
-  late Future<List<City>> _citiesFuture = CityRepository.instance.getCities();
-  int? _selectedCityId;
-
-  void _reload() {
-    setState(() {
-      _citiesFuture = CityRepository.instance.getCities();
-    });
+  Future<void> _changeCity(
+    BuildContext context,
+    CitySelection selection,
+  ) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (sheetContext) => FractionallySizedBox(
+        heightFactor: 0.85,
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: CityPicker(
+            cities: selection.cities,
+            selectedId: selection.selectedCity?.id,
+            onSelected: (city) async {
+              await selection.select(city);
+              if (sheetContext.mounted) Navigator.of(sheetContext).pop();
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('City', style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 8),
-            const Text('Choose a city to explore.'),
-            const SizedBox(height: 24),
-            Expanded(
-              child: FutureBuilder<List<City>>(
-                future: _citiesFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            'Could not load cities. Please try again.',
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 16),
-                          AppButton(label: 'Try again', onPressed: _reload),
-                        ],
-                      ),
-                    );
-                  }
-
-                  final cities = snapshot.data!;
-                  if (cities.isEmpty) {
-                    return const Center(child: Text('No cities available yet.'));
-                  }
-
-                  return ListView.separated(
-                    itemCount: cities.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 8),
-                    itemBuilder: (context, index) {
-                      final city = cities[index];
-                      final isSelected = city.id == _selectedCityId;
-
-                      return Material(
-                        color: isSelected ? AppColors.lightBlue : AppColors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        clipBehavior: Clip.antiAlias,
-                        child: ListTile(
-                          title: Text(city.name),
-                          subtitle: Text(city.country),
-                          selected: isSelected,
-                          trailing: isSelected
-                              ? Icon(
-                                  Icons.check_circle,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  semanticLabel: 'Selected',
-                                )
-                              : const Icon(Icons.circle_outlined),
-                          onTap: () {
-                            setState(() {
-                              _selectedCityId = city.id;
-                            });
-                          },
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+    final selection = CitySelectionScope.of(context);
+    if (selection.isLoading) {
+      return const SafeArea(child: Center(child: CircularProgressIndicator()));
+    }
+    if (selection.hasError) {
+      return SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Could not load cities or restore your selection.'),
+                const SizedBox(height: 16),
+                AppButton(label: 'Try again', onPressed: selection.restore),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      );
+    }
+    final city = selection.selectedCity;
+    return SafeArea(
+      child: city == null
+          ? Padding(
+              padding: const EdgeInsets.all(24),
+              child: CityPicker(
+                cities: selection.cities,
+                onSelected: selection.select,
+              ),
+            )
+          : CityLanding(
+              key: ValueKey(city.id),
+              city: city,
+              onChangeCity: () => _changeCity(context, selection),
+              onExplore: onExplore,
+            ),
     );
   }
 }
