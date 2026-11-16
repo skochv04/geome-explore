@@ -13,7 +13,6 @@ abstract final class Validators {
     return null;
   }
 
-  // varchar(50) w tabeli profiles
   static String? username(String? value) {
     final v = value?.trim() ?? '';
     if (v.length < 3) return 'At least 3 characters';

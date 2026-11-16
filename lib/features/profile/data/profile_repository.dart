@@ -2,7 +2,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'profile.dart';
 
-// Wiersz w `profiles` tworzy trigger `handle_new_user` przy rejestracji.
 class ProfileRepository {
   ProfileRepository._();
   static final ProfileRepository instance = ProfileRepository._();

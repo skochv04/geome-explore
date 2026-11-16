@@ -12,8 +12,6 @@ class AuthRepository {
 
   Stream<AuthState> get authStateChanges => _auth.onAuthStateChange;
 
-  // false = Supabase wymaga potwierdzenia e-mail (brak sesji).
-  // username odczytuje trigger `handle_new_user` z metadanych.
   Future<bool> signUp({
     required String email,
     required String password,
