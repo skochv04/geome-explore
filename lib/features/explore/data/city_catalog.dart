@@ -1,5 +1,3 @@
-import 'explore_filter.dart';
-
 class PostCategory {
   const PostCategory({required this.id, required this.name});
 
@@ -56,10 +54,10 @@ class CityPost {
       coverUrl: map['cover_url'] as String?,
       durationMinutes: map['duration_minutes'] as int,
       createdAt: DateTime.parse(map['created_at'] as String),
-      categoryIds: (map['post_categories'] as List<dynamic>)
+      categoryIds: (map['post_categories'] as List<dynamic>? ?? [])
           .map((row) => row['category_id'] as int)
           .toList(),
-      placeNames: (map['post_places'] as List<dynamic>)
+      placeNames: (map['post_places'] as List<dynamic>? ?? [])
           .where((row) => row['places'] != null)
           .map((row) => row['places']['name'] as String)
           .toList(),
@@ -68,42 +66,30 @@ class CityPost {
   }
 }
 
+class CatalogPage<T> {
+  const CatalogPage({required this.items, required this.hasMore});
+
+  final List<T> items;
+  final bool hasMore;
+
+  factory CatalogPage.fromRows(
+    List<Map<String, dynamic>> rows,
+    T Function(Map<String, dynamic>) fromMap,
+    int pageSize,
+  ) => CatalogPage(
+    items: rows.take(pageSize).map(fromMap).toList(),
+    hasMore: rows.length > pageSize,
+  );
+}
+
 class CityCatalog {
   const CityCatalog({
     required this.posts,
     required this.categories,
     required this.places,
-    this.canRankBySaves = true,
   });
 
   final List<CityPost> posts;
   final List<PostCategory> categories;
   final List<CityPlace> places;
-  final bool canRankBySaves;
-
-  List<CityPost> filteredPosts(ExploreFilter filter) {
-    final query = filter.query.trim().toLowerCase();
-    final result = posts.where((post) {
-      return (filter.maxDuration == null ||
-              post.durationMinutes <= filter.maxDuration!) &&
-          (filter.categoryId == null ||
-              post.categoryIds.contains(filter.categoryId)) &&
-          (query.isEmpty ||
-              '${post.title} ${post.description ?? ''} ${post.placeNames.join(' ')}'
-                  .toLowerCase()
-                  .contains(query));
-    }).toList();
-    result.sort((a, b) {
-      final comparison = switch (filter.sort) {
-        PostSort.newest => b.createdAt.compareTo(a.createdAt),
-        PostSort.mostSaved =>
-          canRankBySaves
-              ? (b.visibleSaveCount ?? 0).compareTo(a.visibleSaveCount ?? 0)
-              : b.createdAt.compareTo(a.createdAt),
-        PostSort.shortest => a.durationMinutes.compareTo(b.durationMinutes),
-      };
-      return comparison != 0 ? comparison : b.id.compareTo(a.id);
-    });
-    return result;
-  }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/app_text_field.dart';
 import '../../city/data/city.dart';
-import '../data/city_catalog.dart';
+
 import '../data/explore_filter.dart';
 import '../widgets/city_catalog_view.dart';
 import '../widgets/post_card.dart';
@@ -43,12 +43,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return SafeArea(
       child: CityCatalogView(
         cityId: widget.city.id,
-        builder: (context, catalog) {
-          final posts = catalog.filteredPosts(_filter);
+        filter: _filter,
+        builder: (context, catalog, pagination) {
+          final posts = catalog.posts;
           final query = _filter.query.trim();
-          final places = query.isEmpty
-              ? <CityPlace>[]
-              : catalog.places.where((place) => place.matches(query)).toList();
+          final places = catalog.places;
           return ListView(
             padding: const EdgeInsets.all(24),
             children: [
@@ -96,6 +95,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     value: 0,
                     child: Text('All categories'),
                   ),
+                  if (_filter.categoryId != null &&
+                      !catalog.categories.any(
+                        (category) => category.id == _filter.categoryId,
+                      ))
+                    DropdownMenuItem(
+                      value: _filter.categoryId,
+                      child: const Text('Selected category'),
+                    ),
                   for (final category in catalog.categories)
                     DropdownMenuItem(
                       value: category.id,
@@ -122,9 +129,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     child: Text('Newest'),
                   ),
                   DropdownMenuItem(
-                    enabled: catalog.canRankBySaves,
+                    enabled: false,
                     value: PostSort.mostSaved,
-                    child: Text('Most saved (visible saves)'),
+                    child: Text('Most saved (unavailable)'),
                   ),
                   DropdownMenuItem(
                     value: PostSort.shortest,
@@ -145,11 +152,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
               if (_filter.sort == PostSort.mostSaved) ...[
                 const SizedBox(height: 12),
-                Text(
-                  catalog.canRankBySaves
-                      ? 'Order uses saves visible to your account. Overall popularity may be unavailable.'
-                      : 'Popularity is unavailable. Collections are ordered by newest.',
-                ),
+                const Text('Popularity ranking is currently unavailable.'),
               ],
               const SizedBox(height: 24),
               Text(
@@ -187,6 +190,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           : Text(place.address!),
                     ),
               ],
+              pagination,
             ],
           );
         },

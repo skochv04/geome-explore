@@ -4,7 +4,7 @@ import '../../../shared/widgets/app_text_field.dart';
 import '../../../shared/widgets/cover_image.dart';
 import '../../explore/data/explore_filter.dart';
 import '../../explore/widgets/city_catalog_view.dart';
-import '../../explore/widgets/post_card.dart';
+
 import '../data/city.dart';
 
 class CityLanding extends StatefulWidget {
@@ -105,35 +105,15 @@ class _CityLandingState extends State<CityLanding> {
         const Text('Find collections within your available time.'),
         CityCatalogView(
           cityId: city.id,
-          builder: (context, catalog) {
-            final popular = catalog.filteredPosts(
-              const ExploreFilter(sort: PostSort.mostSaved),
-            );
+          loadPosts: false,
+          builder: (context, catalog, pagination) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _heading('Popular collections'),
-                Text(
-                  catalog.canRankBySaves
-                      ? 'Order uses saves visible to your account. Overall popularity may be unavailable.'
-                      : 'Popularity is currently unavailable. Use See all to browse collections.',
+                const Text(
+                  'Popularity is currently unavailable. Use See all to browse collections.',
                 ),
-                const SizedBox(height: 12),
-                if (!catalog.canRankBySaves)
-                  const SizedBox.shrink()
-                else if (popular.isEmpty)
-                  const Text('No collections available for this city yet.')
-                else
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final post in popular.take(10))
-                          SizedBox(width: 260, child: PostCard(post: post)),
-                      ],
-                    ),
-                  ),
                 _heading('Categories'),
                 if (catalog.categories.isEmpty)
                   const Text('No categories available yet.')
@@ -151,6 +131,7 @@ class _CityLandingState extends State<CityLanding> {
                         ),
                     ],
                   ),
+                pagination,
               ],
             );
           },
