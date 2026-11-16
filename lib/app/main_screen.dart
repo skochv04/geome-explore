@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/city/screens/city_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import 'theme/app_colors.dart';
 
@@ -23,14 +24,24 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _selectedIndex == 3
-          ? const ProfileScreen()
-          : Center(
-              child: Text(
-                _titles[_selectedIndex],
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Offstage(
+            offstage: _selectedIndex != 0,
+            child: const CityScreen(),
+          ),
+          if (_selectedIndex != 0)
+            _selectedIndex == 3
+                ? const ProfileScreen()
+                : Center(
+                    child: Text(
+                      _titles[_selectedIndex],
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
